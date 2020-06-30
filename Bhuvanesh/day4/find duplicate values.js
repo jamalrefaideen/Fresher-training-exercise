@@ -1,17 +1,15 @@
 //find duplicate items fron array
 
-     function removeDuplicates(num) {
-  var x,len=num.length,out=[],obj={};
- 
-  for (x=0; x<len; x++) {
-    obj[num[x]]=0;
-  }
-  for (x in obj) {
-    out.push(x);
-  }
-  return out;
+var num = [1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6];
+function removeDuplicateValues(array){
+    var result =[];
+    for(var i=0;i<array.length;i++){
+ for (var  j = i + 1 ; j < array.length; j++) {
+     if (array[i]==(array[j])) {
+            result.push(array[i]);
+     }
+ }
+    }
+    return result;
 }
-var Mynum = [1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6];
-result = removeDuplicates(Mynum);
-console.log(Mynum);
-console.log(result);
+console.log(removeDuplicateValues(num));
