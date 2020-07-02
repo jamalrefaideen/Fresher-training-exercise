@@ -14,9 +14,6 @@ function arrayOrNot() {
 console.log(arrayOrNot)
 
 
-
-
-
 //2.Write a JavaScript function to clone an array.
 //Input : [1, 2, 4, 0]
 //Input: [1, 2, [4, 0]]
