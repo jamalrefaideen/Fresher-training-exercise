@@ -4,14 +4,22 @@
 //Sample array : [1,2,3,4,5]
 //Expected Output : 2,4
 
+
+
 function secLowestSecGreatest(arrayNum) {
 
-    var outputNum = []
-    for (var i = o; i < arrayNum.length; i++) {
-  
-  
-  
-  
+  var temp = 0
+  var outputNum = []
+  for (var i = 0; i < arrayNum.length; i++) {
+    if (arrayNum[i - 1] !== arrayNum[i]) {
+      temp.push(arrayNum[i])
     }
+    outputNum.push(temp[1], temp[temp.length - 2])
   }
-  console.log(secLowestSecGreatest([1,2,3,4,5]))
+  return outputNum.join()
+}
+console.log(secLowestSecGreatest([1, 2, 3, 4, 5]))
+
+
+
+

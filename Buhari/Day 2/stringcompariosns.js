@@ -4,11 +4,11 @@
 
 
 function compareString(str1, str2) {
-    if (str1.localeCompare(str2)) {
-      return true
-    } else {
-      return false
-    }
-    return str1.localeCompare(str2)
+  if (str1 === str2) {
+    return true
+  } else {
+    return false
   }
-  console.log(compareString('MOHAMED', 'buhari'))
+
+}
+console.log(compareString('M', 'B'))

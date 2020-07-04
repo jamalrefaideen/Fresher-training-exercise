@@ -1,5 +1,3 @@
-//1,input ="india"
-//output ="india","india","india";
 
 function myCountry(){
     var str="india";
@@ -7,5 +5,4 @@ function myCountry(){
    console.log((str.repeat(3))); 
   }
   myCountry();
-  
   

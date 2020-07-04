@@ -1,18 +1,23 @@
 
 //4.Remove the duplicate Values in the array
 
-function removeDuplicate(arr) {
-    var letters = ['g', 'e', 'e', 'k', 's', 'f',
-        'o', 'r', 'g', 'e', 'e', 'k', 's'];
-        var result =[];
-        for(var i=0;i<array.length;i++){
-     for (var  j = i + 1 ; j < array.length; j++) {
-         if (array[i]==(array[j])) {
-                result.push(array[i]);
-         }
-     }
+function removeDuplicateValues(letter) {
+
+    var temp = [];
+
+    for (var x = 0; x < letter.length; x++) {
+        for (var j = x + 1; j < letter.length; j++) {
+            if (letter[x] == (letter[j])) {
+                temp.push(letter[x]);
+            }
         }
-        return result;
     }
-    console.log(removeDuplicate(num))
+    return temp;
+}
+var letters = ['g', 'e', 'e', 'k', 's', 'f',
+    'o', 'r', 'g', 'e', 'e', 'k', 's']
+console.log(removeDuplicateValues(letters))
+
+
+
 

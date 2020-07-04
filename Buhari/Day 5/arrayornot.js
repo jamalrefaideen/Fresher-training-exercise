@@ -5,10 +5,24 @@ Output: true, false*/
 
 
 function arrayOrNot() {
-    var name = ['dubai'];
-    var num = [1, 2, 3, 4, 0];
-    if (toString.name === toString.num)
-      return true;
-    return false;
+  var name = 'dubai'
+  var num = [1, 2, 3, 4, 0];
+  if (name === num)
+    return true;
+}
+console.log(arrayOrNot)
+
+
+
+
+function checkArrayOrNot(str, arr) {
+
+  if () {
+    
+
   }
-  console.log(arrayOrNot)
+
+}
+console.log(checkArrayOrNot('Dubai', [1, 2, 3, 4, 0]))
+
+
