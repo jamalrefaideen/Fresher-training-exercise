@@ -1,5 +1,6 @@
 
-
+//1. using Js Dom change the style of paragraphs.
+//2.backgroundColor.
 
 function js_style() {
 
@@ -7,24 +8,29 @@ text.style.fontSize = "25px";
 text.style.color ="violet";
 text.style.backgroundColor ="black";
 text.style.padding ="12px"
+
 }
 
+
+
+
+//3.Write a JavaScript function to get the value of the href, hreflang, rel, target, and type attributes of the specified link
 
 
 function getAttributes()
 {
  var u = document.getElementById("w3r").href;
- console.log(('href value is  : '+u));
+ alert(('href value is  : '+u));
 
  var v = document.getElementById("w3r").hreflang;   
- console.log((' hreflang is : '+v));
+ alert((' hreflang is : '+v));
 
  var w = document.getElementById("w3r").rel; 
-  console.log(('Link value is : '+w));
+  alert(('Link value is : '+w));
 
  var x = document.getElementById("w3r").target; 
-  console.log(('Target value is : '+x));
+  alert(('Target value is : '+x));
   
  var y = document.getElementById("w3r").type; 
-  console.log(('type value  is : '+y));  
+  alert(('type value  is : '+y));  
 }
