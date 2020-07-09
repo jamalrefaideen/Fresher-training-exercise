@@ -4,23 +4,23 @@ Example string: 'Web Development Tutorial'
 Expected Output: 'Development'*/
 
 
+
+
 function findLongestWord(str) {
 
-    var strSplit = str.split(' ');
+    var words = str.split(' ');
     var output = words[0];
 
 
-    for (var i = 0; i < strSplit.length; i++) {
+    for (var i = 0; i <words.length; i++) {
 
-        if (output.length > strSplit.length) {
-            output = words[i];
+        if (output.length < words[i].length) {
+            output = words[i]
         }
     }
     return output;
 }
 
-findLongestWord("web Development Tutorial");
-
-
+findLongestWord("web Development Tutorial")
 
 
