@@ -11,55 +11,72 @@
 
 <body>
   <form>
-
-    <div class="containerbox" >
+    <div class="containerbox">
 
       <div class="myHeader">
-        <h1>Employee Registeration Form</h1>
+        <h1>Registeration Form</h1>
       </div>
 
       <p>Kindly fill the form to create your account.</p>
 
       <div>
         <label for="Empid">Employee-Id</label>
-        <input type="text" placeholder="num" name="empid" required>
+        <input type="text" placeholder="num" name="empid" id="empid">
       </div>
 
       <div>
         <label for="fName">First Name</label>
-        <input type="text" placeholder="firstname" name="fName"  required>
+        <input type="text" placeholder="firstname" name="fName" id="fName">
       </div>
 
       <div>
         <label for="lName">Last Name</label>
-        <input type="text" placeholder="lastname" name="lName"  required>
+        <input type="text" placeholder="lastname" name="lName" id="lName">
       </div>
 
       <div>
-        <label for="Address">Address</label>
-        <input type="text" placeholder="Address" name="Address" required >
+        <label for="address">Address</label>
+        <input type="text" placeholder="Address" name="address" id="address">
       </div>
 
-      <div>
-        <label for="Gender">Gender</label><br>
-        <input type="text" placeholder="sex" name="Gender"required>
-      </div>
 
       <div>
-        <label for="mail">Email-Id</label>
-        <input type="text" placeholder="Enter Email"name="mail"  required>
+        <label for="emailId">Email-Id</label>
+        <input type="text" placeholder="Enter Email" name="emailId" id="emailId">
       </div>
 
       <div>
         <label for="psw">Password</label>
-        <input type="password" placeholder="Enter Password"  name="psw"  required>
+        <input type="password" placeholder="Enter Password" name="psw" id="psw">
       </div>
       <div>
-        <button type="submit" class="registerbutton">Register</button>
+        <button type="submit" onclick="getUserInfo(event)" class="submitbtn">Submit</button>
       </div>
 
     </div>
   </form>
-  <script src="form.js" ></script>
+  <br>
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>Employee-Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Email-Id</th>
+        <th>Password</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+    </tbody>
+
+  </table>
+
+  <script src="form.js"></script>
 </body>
+
 </html>
