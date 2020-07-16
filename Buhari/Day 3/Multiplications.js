@@ -26,6 +26,10 @@ function mulitiplication(num1){
     }
     var num =9
     mulitiplication(num)
+
+
+    
+
     
     
     

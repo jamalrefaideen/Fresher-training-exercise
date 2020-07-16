@@ -1,0 +1,41 @@
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-style: italic;
+}
+
+.containerbox {
+  color: black;
+  padding: 15px;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 15%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 50px;
+}
+
+.submitbtn {
+  background-color: #808080;
+  color: black;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-style: italic;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: black;
+  border-radius: 100%;
+  width: 10%;
+}
+
+.outputtable {
+  color: black;
+  width: auto;
+  text-align: center;
+  margin: auto;
+}
