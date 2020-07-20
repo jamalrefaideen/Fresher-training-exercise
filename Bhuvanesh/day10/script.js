@@ -33,7 +33,8 @@ function insertRow(data) {
     <td>${value.name}</td>
     <td>${value.empId}</td>
     <td>${value.salary}</td>
-    <td><button type ="button" id="edit-btn">Edit</button></td>`;
+    <td><button type ="button" id="edit-btn">Edit</button></td>
+    <td><button type ="button" id="delete-btn">Delete</button></td>`;
     tbody.appendChild(tr);
   });
   alert("emp added successfully");
@@ -50,6 +51,11 @@ function onEdit(event) {
     var empId = event.target.parentElement.parentElement.cells.item(1)
       .textContent;
     editField(empId);
+  } else if (event.target.id == "delete-btn") {
+    var empId = event.target.parentElement.parentElement.cells.item(1)
+      .textContent;
+    deleteField(empId);
+    event.target.parentElement.parentElement.remove();
   }
 }
 
@@ -64,6 +70,15 @@ function editField(data) {
       position = index;
     }
   });
+}
+
+function deleteField(data) {
+  empDetails.forEach(function (user, index) {
+    if (user.empId == data) {
+      empDetails.splice(index, 1);
+    }
+  });
+  alert("emp deleted succesfully");
 }
 
 updateBtn.addEventListener("click", updateDetails);
