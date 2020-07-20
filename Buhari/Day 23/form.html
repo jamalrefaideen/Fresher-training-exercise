@@ -11,13 +11,15 @@
 
 <body>
   <form>
+    
+    
     <div class="containerbox">
 
       <div class="myHeader">
         <h1>Registeration Form</h1>
       </div>
 
-      <p>Kindly fill the form to create your account.</p>
+      <p>To create New account.</p>
 
       <div>
         <label for="Empid">Employee-Id</label>
@@ -46,35 +48,31 @@
       </div>
 
       <div>
-        <label for="psw">Password</label>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw">
-      </div>
-      <div>
         <button type="submit" onclick="getUserInfo(event)" class="submitbtn">Submit</button>
+        <button type="button" class="updateBtn">Update</button>
       </div>
 
     </div>
+
   </form>
   <br>
-  <table>
+  <h2 class="mid">User's Data</h2>
+  <div id="outputData">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee-Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+          <th>Email-Id</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
 
-    <thead>
-
-      <tr>
-        <th>Employee-Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Address</th>
-        <th>Email-Id</th>
-        <th>Password</th>
-      </tr>
-
-    </thead>
-
-    <tbody>
-    </tbody>
-
-  </table>
+    </table>
+  </div>
 
   <script src="form.js"></script>
 </body>
