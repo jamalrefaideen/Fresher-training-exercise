@@ -8,6 +8,12 @@ var tbody = document.querySelector("tbody");
 var empDetails = [];
 var position;
 
+function init() {
+  get();
+}
+
+init();
+
 function getUserInfo(event) {
   event.preventDefault();
   var userInfo = {
@@ -18,6 +24,8 @@ function getUserInfo(event) {
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
     empDetails.push(userInfo);
+    store();
+    get();
     insertRow(empDetails);
     clearFields();
   } else {
@@ -33,10 +41,13 @@ function insertRow(data) {
     <td>${value.name}</td>
     <td>${value.empId}</td>
     <td>${value.salary}</td>
-    <td><button type ="button" id="edit-btn">Edit</button></td>`;
+    <td><button type ="button" class="style" id="edit-btn">Edit</button></td>
+    <td><button type ="button" class="style" id="delete-btn">Delete</button></td>`;
+
     tbody.appendChild(tr);
   });
-  alert("emp added successfully");
+
+  //alert("emp added successfully");
 }
 
 function clearFields() {
@@ -69,26 +80,42 @@ function editField(data) {
       position = index;
     }
   });
-}
+  }
 
-
-updateBtn.addEventListener("click", updateDetails);
-
-function updateDetails(event) {
-  empDetails.forEach(function (nam, index) {
-    if (index == position) {
-      var obj = {
-        name: empName.value,
-        empId: empId.value,
-        salary: salary.value,
-      };
-
-      empDetails.splice(index, 1, obj);
-      insertRow(empDetails);
-      clearFields();
-      alert("update emp successfully");
-      updateBtn.style.display = "none";
-      submitBtn.style.display = "block";
+function deleteField(data) {
+  empDetails.forEach(function (user, index) {
+    if (user.empId == data) {
+      empDetails.splice(index, 1);
     }
   });
+
+  alert("emp deleted succesfully");
 }
+
+updateBtn.addEventListener("click", updateDetails);
+function updateDetails(event) {
+  var obj = {
+    name: empName.value,
+    empId: empId.value,
+    salary: salary.value,
+  };
+
+  empDetails.splice(position, 1, obj);
+  insertRow(empDetails);
+  clearFields();
+  store();
+  alert("update emp successfully");
+  updateBtn.style.display = "none";
+  submitBtn.style.display = "block";
+}
+
+function store() {
+  localStorage.setItem("user", JSON.stringify(empDetails));
+}
+
+function get() {
+  var getValues = localStorage.getItem("user");
+  var empList = JSON.parse(getValues) ||[] ;
+  insertRow(empList);
+}
+
