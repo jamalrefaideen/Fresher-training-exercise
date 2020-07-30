@@ -2,14 +2,20 @@ var form = document.querySelector("form");
 var employeeId = document.querySelector("#empid");
 var firstName = document.querySelector("#fName");
 var lastName = document.querySelector("#lName");
-var address = document.querySelector("#address");
+var city = document.querySelector("#address");
 var emailId = document.querySelector("#emailId");
 var submitBtn = document.querySelector(".submitbtn");
-var updateBtn = document.querySelector(".updateBtn");
+var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
-
 var employeeDetails = [];
 var position;
+
+function init() {
+  var empValues = localStorage.getItem("details");
+  var emplist = JSON.parse(empValues) || []
+  insertRow(emplist);
+}
+init()
 
 function getUserInfo(event) {
   event.preventDefault();
@@ -28,16 +34,19 @@ function getUserInfo(event) {
     userInfo.emailId
   ) {
     employeeDetails.push(userInfo);
-    insertRow(employeeDetails);
+    localStorage.setItem("details", JSON.stringify(employeeDetails));
+    var empValues = localStorage.getItem("details");
+    var emplist = JSON.parse(empValues);
+    insertRow(emplist);
     clearFields();
   } else {
-    alert("Please Fill all the Input fields");
+    alert("Kindly Fill all the fields");
   }
 }
 
-function insertRow(employeeDetails) {
+function insertRow(employeeList) {
   tbody.innerHTML = "";
-  employeeDetails.forEach(function (value) {
+  employeeList.forEach(function (value) {
     var tr = document.createElement("tr");
     tr.innerHTML = `
     <td>${value.employeeId}</td>
@@ -46,12 +55,12 @@ function insertRow(employeeDetails) {
     <td>${value.address}</td>
     <td>${value.emailId}</td>
     <td><button type ="button" id="edit-btn">Edit</button></td>
-    <td><button type ="button" id="delete-btn">Update</button></td>
+    <td><button type ="button" id="delete-btn">Delete</button></td>
      `;
     tbody.appendChild(tr);
   });
-  alert("Form Created & added Succesfully")
 }
+
 
 function clearFields() {
   employeeId.value = "";
@@ -63,63 +72,59 @@ function clearFields() {
 
 tbody.addEventListener("click", showUserInput);
 
-
 function showUserInput(event) {
-  if (event.target.id == "edit-Btn") {
-    var emailId = event.target.parentElement.parentElement.cells.item(1).textContent;
-    showUserInput(emailId);
-  } else if (event.target == "delete-Btn") {
-    var emailId = event.target.parentElement.parentElement.cells.item(1).textContent;
-    deleteField(emailId);
+  if (event.target.id == "edit-btn") {
+    var employeeId = event.target.parentElement.parentElement.cells.item(0)
+      .textContent;
+    editUserField(employeeId);
+  } else if (event.target.id == "delete-btn") {
+    var employeeId = event.target.parentElement.parentElement.cells.item(0)
+      .textContent;
+    deleteField(employeeId);
     event.target.parentElement.parentElement.remove();
   }
 }
 
-
 function editUserField(data) {
-  data.forEach(function (user, index) {
-    if (user.emailId == data) {
-      (employeeId.value = user.employeeId),
-        (firstName.value = user.firstName),
-        (lastName.value = user.lastName),
-        (address.value = user.address),
-        (emailId.value = user.emailId),
-        (updateBtn.style.display = "block");
+  employeeDetails.forEach(function (user, index) {
+    if (user.employeeId == data) {
+      employeeId.value = user.employeeId;
+      firstName.value = user.firstName;
+      lastName.value = user.lastName;
+      address.value = user.address;
+      emailId.value = user.emailId;
+      updateBtn.style.display = "block";
       submitBtn.style.display = "none";
 
       position = index;
+      console.log(user);
     }
   });
+}
+
+function deleteField(data) {
+  employeeDetails.forEach(function (user, index) {
+    if (user.employeeId == data) {
+      employeeDetails.splice(index, 1);
+    }
+  });
+  alert("Form deleted succesfully");
 }
 
 updateBtn.addEventListener("click", updateEmployeeDetails);
 
 function updateEmployeeDetails(event) {
-  employeeDetails.forEach(function (name, index) {
-    if (index == position) {
-      var obj = {
-        employeeId: employeeId.value,
-        firstName: firstName.value,
-        lastName: lastName.value,
-        address: address.value,
-        emailId: emailId.value,
-      };
-
-      employeeDetails.splice(index, 1, obj);
-      insertRow(employeeDetails);
-      clearFields();
-      alert("Form updated successfully");
-      updateBtn.style.display = "none";
-      submitBtn.style.display = "block";
-    }
-  });
+  var obj = {
+    employeeId: employeeId.value,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    address: address.value,
+    emailId: emailId.value,
+  };
+  employeeDetails.splice(position, 1, obj);
+  insertRow(employeeDetails);
+  clearFields();
+  alert("Form Updated successfully");
+  updateBtn.style.display = "none";
+  submitBtn.style.display = "block";
 }
-
-
-
-
-
-
-
-
-

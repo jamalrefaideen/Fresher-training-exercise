@@ -11,7 +11,13 @@ text.style.padding ="12px"
 
 }
 
+//2. backgroundColor using addEventListener
 
+document.addEventListener("click", changeColor);
+
+    function changeColor() {
+      document.body.style.backgroundColor = "#FFC926";
+    }
 
 
 //3.Write a JavaScript function to get the value of the href, hreflang, rel, target, and type attributes of the specified link
@@ -34,3 +40,11 @@ function getAttributes()
  var y = document.getElementById("w3r").type; 
   alert(('type value  is : '+y));  
 }
+
+
+
+
+
+
+
+
