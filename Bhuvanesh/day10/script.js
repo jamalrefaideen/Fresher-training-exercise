@@ -5,12 +5,12 @@ var salary = document.querySelector("#salary");
 var submitBtn = document.querySelector(".submit-btn");
 var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
-var empDetails =[];
 var position;
+localStorage.setItem("user",'[]')
 
 function init() {
   var userList = getStorage();
-  var empList = userList || [];
+  var empList = userList;
   insertRow(empList);
 }
 init();
@@ -24,10 +24,9 @@ function getUserInfo(event) {
   };
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
-    empDetails.push(userInfo);
     var userList = getStorage();
-    console.log(userList);
-    addStorage(empDetails);
+    userList.push(userInfo)
+    addStorage(userList);
     insertRow(userList);
     clearFields();
   } else {
@@ -105,7 +104,6 @@ function updateDetails(event) {
   var empDetails = getStorage();
   empDetails.splice(position, 1, obj);
   addStorage(empDetails);
-  var empDetails = getStorage();
   insertRow(empDetails);
   clearFields();
   alert("update emp successfully");
