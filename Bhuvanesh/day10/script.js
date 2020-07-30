@@ -5,8 +5,15 @@ var salary = document.querySelector("#salary");
 var submitBtn = document.querySelector(".submit-btn");
 var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
-var empDetails = [];
 var position;
+localStorage.setItem("user",'[]')
+
+function init() {
+  var userList = getStorage();
+  var empList = userList;
+  insertRow(empList);
+}
+init();
 
 function getUserInfo(event) {
   event.preventDefault();
@@ -17,8 +24,10 @@ function getUserInfo(event) {
   };
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
-    empDetails.push(userInfo);
-    insertRow(empDetails);
+    var userList = getStorage();
+    userList.push(userInfo)
+    addStorage(userList);
+    insertRow(userList);
     clearFields();
   } else {
     alert("please fill all the fields");
@@ -33,10 +42,11 @@ function insertRow(data) {
     <td>${value.name}</td>
     <td>${value.empId}</td>
     <td>${value.salary}</td>
-    <td><button type ="button" id="edit-btn">Edit</button></td>`;
+    <td><button type ="button" class="style" id="edit-btn">Edit</button></td>
+    <td><button type ="button" class="style" id="delete-btn">Delete</button></td>`;
+
     tbody.appendChild(tr);
   });
-  alert("emp added successfully");
 }
 
 function clearFields() {
@@ -59,6 +69,7 @@ function onEdit(event) {
 }
 
 function editField(data) {
+  var empDetails = getStorage();
   empDetails.forEach(function (user, index) {
     if (user.empId == data) {
       empName.value = user.name;
@@ -71,24 +82,46 @@ function editField(data) {
   });
 }
 
-
-updateBtn.addEventListener("click", updateDetails);
-
-function updateDetails(event) {
-  empDetails.forEach(function (nam, index) {
-    if (index == position) {
-      var obj = {
-        name: empName.value,
-        empId: empId.value,
-        salary: salary.value,
-      };
-
-      empDetails.splice(index, 1, obj);
-      insertRow(empDetails);
-      clearFields();
-      alert("update emp successfully");
-      updateBtn.style.display = "none";
-      submitBtn.style.display = "block";
+function deleteField(data) {
+  var empDetails = getStorage();
+  empDetails.forEach(function (user, index) {
+    if (user.empId == data) {
+      empDetails.splice(index, 1);
     }
   });
+addStorage(empDetails);
+alert("emp deleted succesfully");
 }
+
+
+updateBtn.addEventListener("click", updateDetails);
+function updateDetails(event) {
+  var obj = {
+    name: empName.value,
+    empId: empId.value,
+    salary: salary.value,
+  };
+  var empDetails = getStorage();
+  empDetails.splice(position, 1, obj);
+  addStorage(empDetails);
+  insertRow(empDetails);
+  clearFields();
+  alert("update emp successfully");
+  updateBtn.style.display = "none";
+  submitBtn.style.display = "block";
+}
+
+function addStorage(empDetails) {
+  localStorage.setItem("user", JSON.stringify(empDetails));
+
+}
+function getStorage(){
+ var userList = localStorage.getItem("user");
+ return JSON.parse(userList)
+  
+}
+
+
+
+  
+
