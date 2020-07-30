@@ -24,16 +24,23 @@ function getUserInfo(event) {
   };
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
-    empDetails.push(userInfo);
-    var userList = getStorage();
-    console.log(userList);
-    addStorage(empDetails);
-    insertRow(userList);
+  if (localStorage.getItem("user")){
+  var userList = getStorage();
+  userList.push(userInfo);
+  addStorage(empDetails);
+  var list = getStorage();
+  insertRow(list);
+  }else {
+
+  }
+
+}
+    
     clearFields();
   } else {
     alert("please fill all the fields");
   }
-}
+
 
 function insertRow(data) {
   tbody.innerHTML = "";
