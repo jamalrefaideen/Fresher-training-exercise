@@ -5,12 +5,12 @@ var salary = document.querySelector("#salary");
 var submitBtn = document.querySelector(".submit-btn");
 var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
-var empDetails =[];
 var position;
+localStorage.setItem("user",'[]')
 
 function init() {
   var userList = getStorage();
-  var empList = userList || [];
+  var empList = userList;
   insertRow(empList);
 }
 init();
@@ -24,23 +24,15 @@ function getUserInfo(event) {
   };
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
-  if (localStorage.getItem("user")){
-  var userList = getStorage();
-  userList.push(userInfo);
-  addStorage(empDetails);
-  var list = getStorage();
-  insertRow(list);
-  }else {
-
-  }
-
-}
-    
+    var userList = getStorage();
+    userList.push(userInfo)
+    addStorage(userList);
+    insertRow(userList);
     clearFields();
   } else {
     alert("please fill all the fields");
   }
-
+}
 
 function insertRow(data) {
   tbody.innerHTML = "";
@@ -112,7 +104,6 @@ function updateDetails(event) {
   var empDetails = getStorage();
   empDetails.splice(position, 1, obj);
   addStorage(empDetails);
-  var empDetails = getStorage();
   insertRow(empDetails);
   clearFields();
   alert("update emp successfully");
@@ -133,3 +124,4 @@ function getStorage(){
 
 
   
+
