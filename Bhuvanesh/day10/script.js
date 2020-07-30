@@ -5,13 +5,14 @@ var salary = document.querySelector("#salary");
 var submitBtn = document.querySelector(".submit-btn");
 var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
-var empDetails = [];
+var empDetails =[];
 var position;
 
 function init() {
-  get();
+  var userList = getStorage();
+  var empList = userList || [];
+  insertRow(empList);
 }
-
 init();
 
 function getUserInfo(event) {
@@ -24,9 +25,10 @@ function getUserInfo(event) {
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
     empDetails.push(userInfo);
-    store();
-    get();
-    insertRow(empDetails);
+    var userList = getStorage();
+    console.log(userList);
+    addStorage(empDetails);
+    insertRow(userList);
     clearFields();
   } else {
     alert("please fill all the fields");
@@ -46,8 +48,6 @@ function insertRow(data) {
 
     tbody.appendChild(tr);
   });
-
-  //alert("emp added successfully");
 }
 
 function clearFields() {
@@ -70,6 +70,7 @@ function onEdit(event) {
 }
 
 function editField(data) {
+  var empDetails = getStorage();
   empDetails.forEach(function (user, index) {
     if (user.empId == data) {
       empName.value = user.name;
@@ -80,17 +81,19 @@ function editField(data) {
       position = index;
     }
   });
-  }
+}
 
 function deleteField(data) {
+  var empDetails = getStorage();
   empDetails.forEach(function (user, index) {
     if (user.empId == data) {
       empDetails.splice(index, 1);
     }
   });
-
-  alert("emp deleted succesfully");
+addStorage(empDetails);
+alert("emp deleted succesfully");
 }
+
 
 updateBtn.addEventListener("click", updateDetails);
 function updateDetails(event) {
@@ -99,23 +102,27 @@ function updateDetails(event) {
     empId: empId.value,
     salary: salary.value,
   };
-
+  var empDetails = getStorage();
   empDetails.splice(position, 1, obj);
+  addStorage(empDetails);
+  var empDetails = getStorage();
   insertRow(empDetails);
   clearFields();
-  store();
   alert("update emp successfully");
   updateBtn.style.display = "none";
   submitBtn.style.display = "block";
 }
 
-function store() {
+function addStorage(empDetails) {
   localStorage.setItem("user", JSON.stringify(empDetails));
+
+}
+function getStorage(){
+ var userList = localStorage.getItem("user");
+ return JSON.parse(userList)
+  
 }
 
-function get() {
-  var getValues = localStorage.getItem("user");
-  var empList = JSON.parse(getValues) ||[] ;
-  insertRow(empList);
-}
 
+
+  
