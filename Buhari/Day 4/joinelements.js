@@ -1,4 +1,4 @@
-
+//Objects are useful for storing data in a structured way
 //3.Join the all elemnts  
 
 

@@ -1,51 +1,96 @@
 body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: cursive;
   font-style: italic;
+  background-color: #e8f3f8;
+  font-weight: bold;
 }
-
-.myHeader{
-  margin: auto;
-  width: fit-content;
-  background-color: #808080    ;
-
-}
-.containerbox {
-  color: black;
-  padding: 15px;
+h1 {
   text-align: center;
+  font-size: 40px;
+  color: steelblue;
 }
-
-input[type="text"],
-input[type="password"] {
-  width: 15%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none; 
-  background: #f1f1f1;
-  border-radius: 50px;
+form {
+  margin: 20px auto;
+  width: 320px;
+  color: steelblue;
 }
-
-.submitbtn {
-  background-color:#4CAF50;
-  color: black;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+input {
+  padding: 10px;
+  font-size: inherit;
+}
+input[type="text"] {
+  font-family: cursive;
   font-style: italic;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: black;
-  border-radius: 100%;
-  width: 10%;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 2px solid steelblue;
+  background-color: #faf6d9;
 }
-#outputData {
-  margin: auto;
-  width: fit-content;
-  background-color: #808080;
-  
+input:hover {
+  background-color: white;
 }
-.mid{
+.submitbtn {
+  font-family: cursive;
+  cursor: pointer;
+  width: 344px;
+  height: 45px;
+  border: none;
+  background: steelblue;
+  color: black;
+}
+.submitbtn:hover {
+  font-family: cursive;
+  width: 344px;
+  height: 45px;
+  /* border: solid greenyellow;    */
+  /* border: 2px greenyellow; */
+  background:#00ffc3;
+  color: black;
+}
+
+.updatebtn {
+  display: none;
+  font-family: cursive;
+  cursor: pointer;
+  width: 344px;
+  height: 45px;
+  border: none;
+  background: steelblue;
+  color: white;
+}
+.updatebtn:focus {
+  font-family: cursive;
+  width: 344px;
+  height: 45px;
+  /* border: solid greenyellow;    */
+  /* border: 2px greenyellow; */
+  background:#00ffc3;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  color: steelblue;
+}
+.outputdata {
   margin: auto;
+}
+table {
+  /* font-family:"Courier New", Courier, monospace; */
+  border-collapse: collapse;
   width: fit-content;
-  background-color: #808080;
+}
+th {
+  color: steelblue;
+}
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #faf6d9;
 }
