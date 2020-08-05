@@ -6,8 +6,6 @@ var submitBtn = document.querySelector(".submit-btn");
 var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
 var position;
-localStorage.setItem("user",'[]')
-
 function init() {
   var userList = getStorage();
   var empList = userList;
@@ -21,7 +19,7 @@ function getUserInfo(event) {
     name: event.target.form[0].value,
     empId: event.target.form[1].value,
     salary: event.target.form[2].value,
-  };
+  }
 
   if (userInfo.name && userInfo.empId && userInfo.salary) {
     var userList = getStorage();
@@ -116,9 +114,16 @@ function addStorage(empDetails) {
 
 }
 function getStorage(){
- var userList = localStorage.getItem("user");
- return JSON.parse(userList)
-  
+  if(localStorage.getItem("user")){
+    var userList = localStorage.getItem("user");
+    return JSON.parse(userList)
+     
+}else{
+  localStorage.setItem("user",'[]')
+  var userList = localStorage.getItem("user");
+  return JSON.parse(userList)
+}
+
 }
 
 
