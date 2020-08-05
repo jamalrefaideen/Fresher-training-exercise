@@ -7,15 +7,15 @@ var emailId = document.querySelector("#emailId");
 var submitBtn = document.querySelector(".submitbtn");
 var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
-var employeeDetails = [];
 var position;
+localStorage.setItem("userDetails", "[]");
 
 function init() {
-  var empValues = localStorage.getItem("details");
-  var emplist = JSON.parse(empValues) || []
-  insertRow(emplist);
+  var userList = getStorage();
+  var empList = userList;
+  insertRow(empList);
 }
-init()
+init();
 
 function getUserInfo(event) {
   event.preventDefault();
@@ -33,11 +33,10 @@ function getUserInfo(event) {
     userInfo.address &&
     userInfo.emailId
   ) {
-    employeeDetails.push(userInfo);
-    localStorage.setItem("details", JSON.stringify(employeeDetails));
-    var empValues = localStorage.getItem("details");
-    var emplist = JSON.parse(empValues);
-    insertRow(emplist);
+    var userList = getStorage();
+    userList.push(userInfo)
+    addStorage(userList);
+    insertRow(userList);
     clearFields();
   } else {
     alert("Kindly Fill all the fields");
@@ -60,7 +59,6 @@ function insertRow(employeeList) {
     tbody.appendChild(tr);
   });
 }
-
 
 function clearFields() {
   employeeId.value = "";
@@ -86,6 +84,7 @@ function showUserInput(event) {
 }
 
 function editUserField(data) {
+  var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
     if (user.employeeId == data) {
       employeeId.value = user.employeeId;
@@ -95,24 +94,23 @@ function editUserField(data) {
       emailId.value = user.emailId;
       updateBtn.style.display = "block";
       submitBtn.style.display = "none";
-
       position = index;
-      console.log(user);
     }
   });
 }
 
 function deleteField(data) {
+  var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
     if (user.employeeId == data) {
       employeeDetails.splice(index, 1);
     }
   });
+  addStorage(employeeDetails);
   alert("Form deleted succesfully");
 }
 
 updateBtn.addEventListener("click", updateEmployeeDetails);
-
 function updateEmployeeDetails(event) {
   var obj = {
     employeeId: employeeId.value,
@@ -121,10 +119,21 @@ function updateEmployeeDetails(event) {
     address: address.value,
     emailId: emailId.value,
   };
+  var employeeDetails = getStorage();
   employeeDetails.splice(position, 1, obj);
+  addStorage(employeeDetails);
   insertRow(employeeDetails);
   clearFields();
   alert("Form Updated successfully");
   updateBtn.style.display = "none";
   submitBtn.style.display = "block";
+}
+
+function addStorage(employeeDetails) {
+  localStorage.setItem("userDetails", JSON.stringify(employeeDetails));
+}
+
+function getStorage() {
+  var userList = localStorage.getItem("userDetails");
+  return JSON.parse(userList)
 }
