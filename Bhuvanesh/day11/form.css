@@ -1,13 +1,9 @@
-
-
-
-
-form{
+form {
   text-align: center;
   margin: 0 auto;
   width: 50%;
-
 }
+
 .containerbox {
   margin: 0 auto;
   width: 50%;
@@ -16,20 +12,13 @@ form{
   text-align: center;
 }
 
-
-
-.font{
+.font {
   font-family: "Times New Roman", Times, serif;
   font-size: 40px;
-  color:#0dd9d2;
-
-
-
+  color: #0dd9d2;
 }
 
-
-
-input[type=text] {
+input[type="text"] {
   font-family: "Times New Roman", Times, serif;
   margin: 0 auto;
   width: 50%;
@@ -37,10 +26,8 @@ input[type=text] {
   margin: 12px;
 
   box-sizing: border-box;
-  
-  
-  
 }
+
 .btn {
   margin: 0 auto;
   text-align: center;
@@ -50,13 +37,11 @@ input[type=text] {
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
-  
 }
-.update-btn{
- margin: 0 auto;
+.update-btn {
+  margin: 0 auto;
   text-align: center;
-  display:none;
-
+  display: none;
 }
 
 table {
@@ -64,27 +49,24 @@ table {
   border-collapse: collapse;
   text-align: center;
   margin: 0 auto;
-   width: 40%;
-   padding: 12px;
+  width: 40%;
+  padding: 12px;
 }
 
-td, th {
+td,
+th {
   border: 1px solid black;
   text-align: left;
   padding: 10px;
 }
 
-
 tr:nth-child(even) {
   background-color: #c7c3b9;
-  
 }
 
-
-
-.style{
+.style {
   margin: 0 auto;
-  width:100%;
+  width: 100%;
   text-align: center;
   font-size: 15px;
   background-color: #219cde;
