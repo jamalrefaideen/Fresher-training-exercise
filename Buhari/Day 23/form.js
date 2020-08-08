@@ -8,7 +8,6 @@ var submitBtn = document.querySelector(".submitbtn");
 var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
 var position;
-localStorage.setItem("userDetails", "[]");
 
 function init() {
   var userList = getStorage();
@@ -25,7 +24,7 @@ function getUserInfo(event) {
     lastName: event.target.form[2].value,
     address: event.target.form[3].value,
     emailId: event.target.form[4].value,
-  };
+  }
   if (
     userInfo.employeeId &&
     userInfo.firstName &&
@@ -34,7 +33,7 @@ function getUserInfo(event) {
     userInfo.emailId
   ) {
     var userList = getStorage();
-    userList.push(userInfo)
+    userList.push(userInfo);
     addStorage(userList);
     insertRow(userList);
     clearFields();
@@ -43,9 +42,9 @@ function getUserInfo(event) {
   }
 }
 
-function insertRow(employeeList) {
+function insertRow(data) {
   tbody.innerHTML = "";
-  employeeList.forEach(function (value) {
+  data.forEach(function (value) {
     var tr = document.createElement("tr");
     tr.innerHTML = `
     <td>${value.employeeId}</td>
@@ -59,7 +58,6 @@ function insertRow(employeeList) {
     tbody.appendChild(tr);
   });
 }
-
 function clearFields() {
   employeeId.value = "";
   firstName.value = "";
@@ -67,7 +65,6 @@ function clearFields() {
   address.value = "";
   emailId.value = "";
 }
-
 tbody.addEventListener("click", showUserInput);
 
 function showUserInput(event) {
@@ -82,7 +79,6 @@ function showUserInput(event) {
     event.target.parentElement.parentElement.remove();
   }
 }
-
 function editUserField(data) {
   var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
@@ -98,7 +94,6 @@ function editUserField(data) {
     }
   });
 }
-
 function deleteField(data) {
   var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
@@ -128,12 +123,16 @@ function updateEmployeeDetails(event) {
   updateBtn.style.display = "none";
   submitBtn.style.display = "block";
 }
-
 function addStorage(employeeDetails) {
   localStorage.setItem("userDetails", JSON.stringify(employeeDetails));
 }
-
 function getStorage() {
-  var userList = localStorage.getItem("userDetails");
-  return JSON.parse(userList)
+  if (localStorage.getItem("userDetails")) {
+    var userList = localStorage.getItem("userDetails");
+    return JSON.parse(userList);
+  } else {
+    localStorage.setItem("userDetails", "[]");
+    var userList = localStorage.getItem("userDetails");
+    return JSON.parse(userList);
+  }
 }
