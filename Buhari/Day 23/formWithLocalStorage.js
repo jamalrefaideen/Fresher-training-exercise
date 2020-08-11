@@ -1,3 +1,6 @@
+//CURD OPERATION WITH USING LOCAL STORAGE
+
+// Interacting With HTML Using DOM
 var form = document.querySelector("form");
 var employeeId = document.querySelector("#empid");
 var firstName = document.querySelector("#fName");
@@ -9,6 +12,7 @@ var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
 var position;
 
+//Preventing Data's  in Ui from refreshing or reloding page
 function init() {
   var userList = getStorage();
   var empList = userList;
@@ -16,6 +20,7 @@ function init() {
 }
 init();
 
+// Getting User Form Inputs Data
 function getUserInfo(event) {
   event.preventDefault();
   var userInfo = {
@@ -24,7 +29,7 @@ function getUserInfo(event) {
     lastName: event.target.form[2].value,
     address: event.target.form[3].value,
     emailId: event.target.form[4].value,
-  }
+  };
   if (
     userInfo.employeeId &&
     userInfo.firstName &&
@@ -42,6 +47,7 @@ function getUserInfo(event) {
   }
 }
 
+// Inserting the User Inputs Data in Table after submiting the form
 function insertRow(data) {
   tbody.innerHTML = "";
   data.forEach(function (value) {
@@ -58,6 +64,8 @@ function insertRow(data) {
     tbody.appendChild(tr);
   });
 }
+
+// While submiting should empty the Textfield
 function clearFields() {
   employeeId.value = "";
   firstName.value = "";
@@ -65,6 +73,8 @@ function clearFields() {
   address.value = "";
   emailId.value = "";
 }
+
+// Attaching EvenListener to show the inputs in the TextField Box to Edit or Delete and to Update again
 tbody.addEventListener("click", showUserInput);
 
 function showUserInput(event) {
@@ -79,6 +89,8 @@ function showUserInput(event) {
     event.target.parentElement.parentElement.remove();
   }
 }
+
+// To Edit the input Data's
 function editUserField(data) {
   var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
@@ -94,6 +106,8 @@ function editUserField(data) {
     }
   });
 }
+
+//To delete the input Data's
 function deleteField(data) {
   var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
@@ -106,6 +120,8 @@ function deleteField(data) {
 }
 
 updateBtn.addEventListener("click", updateEmployeeDetails);
+
+// To Update the  edited Data
 function updateEmployeeDetails(event) {
   var obj = {
     employeeId: employeeId.value,
@@ -123,9 +139,12 @@ function updateEmployeeDetails(event) {
   updateBtn.style.display = "none";
   submitBtn.style.display = "block";
 }
+
+// To store the Data's in the LOCAL STORAGE
 function addStorage(employeeDetails) {
   localStorage.setItem("userDetails", JSON.stringify(employeeDetails));
 }
+
 function getStorage() {
   if (localStorage.getItem("userDetails")) {
     var userList = localStorage.getItem("userDetails");

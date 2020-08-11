@@ -1,6 +1,4 @@
 // CRUD OPERATIONS USING CONSTRUCTOR OJECTS 
-//without Using Local storage 
-
 
 // Interacting With HTML Using DOM
 var form = document.querySelector("form");
@@ -10,12 +8,30 @@ var address = document.querySelector("#address");
 var submitBtn = document.querySelector(".submitbtn");
 var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
+var position;
 
-var employeeDetails = [];
+// var employeeDetails = [];
+
+
+Store.addDataToLocalStorage = function (employeeDetails) {
+  localStorage.setItem("user", JSON.stringify(employeeDetails));
+};
+
+Store.getDataFormLocalStorage = function () {
+  if (localStorage.getItem("user")) {
+    var userList = localStorage.getItem("user");
+    return JSON.parse(userList);
+  } else {
+    localStorage.setItem("user", "[]");
+    var userList = localStorage.getItem("user");
+    return JSON.parse(userList);
+  }
+};
+
 
 // CREATING FUNCTION CONSTRUCTOR (BLUEPRINT)
 function User(employeeName, fullName, address) {
-  this.employeeName = employeeName;
+  this.employeeId = employeeName;
   this.fullName = fullName;
   this.address = address;
 }
@@ -44,15 +60,18 @@ Ui.clearUserField = function () {
 };
 
 Ui.deleteUserField = function (data) {
+  var employeeDetails = Store.getDataFormLocalStorage();
   employeeDetails.forEach(function (user, index) {
     if (user.employeeId == data) {
       employeeDetails.splice(index, 1);
     }
   });
   alert("Warning - All data will be Erased ");
+  Store.addDataToLocalStorage(employeeDetails);
 };
 
 Ui.editUserfield = function (data) {
+  var employeeDetails = Store.getDataFormLocalStorage();
   employeeDetails.forEach(function (user, index) {
     if (user.employeeId == data) {
       employeeId.value = user.employeeId;
@@ -71,7 +90,9 @@ Ui.upadteEmployeeDetails = function () {
     fullName: fullName.value,
     address: address.value,
   };
+  var employeeDetails = Store.getDataFormLocalStorage();
   employeeDetails.splice(position, 1, obj);
+  Store.addDataToLocalStorage(employeeDetails);
   Ui.insertUserInfo(employeeDetails);
   alert("Form Data Updated successfully");
   updateBtn.style.display = "none";
@@ -87,8 +108,10 @@ function getUserInfo(event) {
   var name = fullName.value;
   var city = address.value;
   var userDetails = new User(empId, name, city);
-  employeeDetails.push(userDetails);
-  Ui.insertUserInfo(employeeDetails);
+  var userList = Store.getDataFormLocalStorage();
+  userList.push(userDetails);
+  Store.addDataToLocalStorage(userList)
+  Ui.insertUserInfo(userList);
   alert ("Registered Succesfully")
 }
 
@@ -115,20 +138,13 @@ function updateUserField(event) {
 
 // Setting UserData's Information to Local Storage
 
-
 function Store() {}
 
-Store.addDataToLocalStorage = function (employeeDetails) {
-  localStorage.setItem("user", JSON.stringify(employeeDetails));
-};
+//Preventing Data's  in Ui from refreshing or reloding page 
 
-Store.getDataFormLocalStorage = function () {
-  if (localStorage.getItem("user")) {
-    var userList = localStorage.getItem("user");
-    return JSON.parse(userList);
-  } else {
-    localStorage.setItem("user", "[]");
-    var userList = localStorage.getItem("user");
-    return JSON.parse(userList);
-  }
-};
+function init() {
+  var userList = Store.getDataFormLocalStorage();
+  // var empList = userList;
+  Ui.insertUserInfo(userList);
+}
+init();
