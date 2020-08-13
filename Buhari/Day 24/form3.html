@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validations</title>
+    <link rel="stylesheet" href="form3.css" />
+  </head>
+
+  <body>
+    <h1>Registeration Form</h1>
+    <form>
+      <p>To create New account.</p>
+      <label for="EmpId">Employee-Id</label>
+      <input type="text" placeholder="id" name="empid" id="employeeId" />
+      <label for="empName">Name</label>
+      <input type="text" placeholder="fullname" name="fName" id="fullName" />
+      <label for="empAddress">City</label>
+      <input type="text" name="address" placeholder="address" id="address" />
+      <button type="submit" class="submitbtn">
+        Submit
+      </button>
+      <button type="button" class="updatebtn">Update</button>
+    </form>
+    <br />
+    <h2>User's Data</h2>
+    <table class="outputdata">
+      <thead>
+        <tr>
+          <th>Employee-Id</th>
+          <th>Name</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="formWithConstructors.js"></script>
+  </body>
+</html>
+ 
