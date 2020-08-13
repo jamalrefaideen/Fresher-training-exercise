@@ -7,11 +7,21 @@ var updateBtn = document.querySelector(".update-btn");
 var tbody = document.querySelector("tbody");
 var position;
 
-function init () {
- 
-  document.addEventListener('DOMContentLoaded',Ui.empDetail)
-}
-init()
+Store.addDataToLocal = function (empDetails) {
+  localStorage.setItem("user", JSON.stringify(empDetails));
+};
+
+Store.getDataFromLocal = function () {
+  if (localStorage.getItem("user")) {
+    var userList = localStorage.getItem("user");
+    return JSON.parse(userList);
+  } else {
+    localStorage.setItem("user", "[]");
+    var userList = localStorage.getItem("user");
+    return JSON.parse(userList);
+  }
+};
+
 
 function User(empName, empId, salary) {
   this.empName = empName;
@@ -20,13 +30,6 @@ function User(empName, empId, salary) {
 }
 
 function Ui() {}
-
-Ui.empDetail = function(){
-  var userList = Store.getDataFromLocal();
-  userList.forEach(function(users){
-Ui.addUser*(users);
-  });
-}
 
 Ui.addUser = function (users) {
   tbody.innerHTML = "";
@@ -123,17 +126,8 @@ function updateDetails(event) {
 
 function Store() {}
 
-Store.addDataToLocal = function (empDetails) {
-  localStorage.setItem("user", JSON.stringify(empDetails));
-};
-
-Store.getDataFromLocal = function () {
-  if (localStorage.getItem("user")) {
-    var userList = localStorage.getItem("user");
-    return JSON.parse(userList);
-  } else {
-    localStorage.setItem("user", "[]");
-    var userList = localStorage.getItem("user");
-    return JSON.parse(userList);
-  }
-};
+function init () {
+  var userList = Store.getDataFromLocal();
+  Ui.addUser(userList);
+}
+init()
