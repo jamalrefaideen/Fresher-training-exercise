@@ -1,0 +1,97 @@
+body {
+  /* background-image: image(palmsummerjpg);  */
+  font-family: cursive;
+  font-style: italic;
+  background-color: #e8f3f8;
+  font-weight: bold;
+}
+h1 {
+  text-align: center;
+  font-size: 40px;
+  color: steelblue;
+}
+form {
+  margin: 20px auto;
+  width: 320px;
+  color: steelblue;
+}
+input {
+  padding: 10px;
+  font-size: inherit;
+}
+input[type="text"] {
+  font-family: cursive;
+  font-style: italic;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 2px solid steelblue;
+  background-color: #faf6d9;
+}
+input:hover {
+  background-color: white;
+}
+.submitbtn {
+  font-family: cursive;
+  cursor: pointer;
+  width: 344px;
+  height: 45px;
+  border: none;
+  background: steelblue;
+  color: black;
+}
+.submitbtn:hover {
+  font-family: cursive;
+  width: 344px;
+  height: 45px;
+  /* border: solid greenyellow;    */
+  /* border: 2px greenyellow; */
+  background:#00ffc3;
+  color: black;
+}
+
+.updatebtn {
+  display: none;
+  font-family: cursive;
+  cursor: pointer;
+  width: 344px;
+  height: 45px;
+  border: none;
+  background: steelblue;
+  color: white;
+}
+.updatebtn:focus {
+  font-family: cursive;
+  width: 344px;
+  height: 45px;
+  /* border: solid greenyellow;    */
+  /* border: 2px greenyellow; */
+  background:#00ffc3;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  color: steelblue;
+}
+.outputdata {
+  margin: auto;
+}
+table {
+  /* font-family:"Courier New", Courier, monospace; */
+  border-collapse: collapse;
+  width: fit-content;
+}
+th {
+  color: steelblue;
+}
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #faf6d9;
+}

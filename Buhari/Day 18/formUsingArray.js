@@ -2,18 +2,21 @@
 
 // Interacting With HTML Using DOM to Collect the data's from there
 var form = document.querySelector("form");
-var employeeId = document.querySelector("#empid");
+var employeeId = document.querySelector("#empId");
 var firstName = document.querySelector("#fName");
 var lastName = document.querySelector("#lName");
 var address = document.querySelector("#address");
-var emailId = document.querySelector("#mailId");
-var password = document.querySelector("#psw");
+var emailId = document.querySelector("#emailId");
 var submitBtn = document.querySelector(".submitbtn");
+var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
 
 var employeeDetails = [];
 
 // Getting User Form Inputs Data
+
+submitBtn.addEventListener("Click",getUserInfo);
+
 function getUserInfo(event) {
   event.preventDefault();
   var userInfo = {
@@ -22,32 +25,30 @@ function getUserInfo(event) {
     lastName: event.target.form[2].value,
     address: event.target.form[3].value,
     emailId: event.target.form[4].value,
-    password: event.target.form[5].value,
   };
   if (
     userInfo.employeeId &&
     userInfo.firstName &&
     userInfo.lastName &&
     userInfo.address &&
-    userInfo.emailId &&
-    userInfo.password
+    userInfo.emailId 
   ) {
     employeeDetails.push(userInfo);
     insertRow(employeeDetails);
+    clearFields();
   }
 }
 // Inserting the User Inputs Data in Table after submiting the form
-function insertRow(employeeDetails) {
+function insertRow(data) {
   tbody.innerHTML = "";
-  employeeDetails.forEach(function (employee) {
+  data.forEach(function (value) {
     var tr = document.createElement("tr");
     tr.innerHTML = `
-    <td>${employee.employeeId}</td>
-    <td>${employee.firstName}</td>
-    <td>${employee.lastName}</td>
-    <td>${employee.address}</td>
-    <td>${employee.emailId}</td>
-    <td>${employee.password}</td>
+    <td>${value.employeeId}</td>
+    <td>${value.firstName}</td>
+    <td>${value.lastName}</td>
+    <td>${value.address}</td>
+    <td>${value.emailId}</td>
     <td><button type ="button" id="edit-btn">Edit</button></td>
     <td><button type ="button" id="delete-btn">Update</button></td>
      `;
@@ -62,7 +63,6 @@ function clearFields() {
   lastName.value = "";
   address.value = "";
   emailId.value = "";
-  password.value = "";
 }
 
 // Attaching EvenListener to show the inputs in the TextField Box to Edit or Delete and to Update again
@@ -98,13 +98,12 @@ function editUserField(data) {
 }
 //To delete the input Data's
 function deleteField(data) {
-  var employeeDetails = getStorage();
   employeeDetails.forEach(function (user, index) {
     if (user.employeeId == data) {
       employeeDetails.splice(index, 1);
     }
   });
-  alert("Form deleted succesfully");
+  alert("Warning - All Data Will Erase !?");
 }
 
 // To Update the  edited Data

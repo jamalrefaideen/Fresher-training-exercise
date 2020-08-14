@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form</title>
-    <link rel="stylesheet" href="form2.css" />
+    <title>Form Registeration</title>
+    <link rel="stylesheet" href="form.css" />
   </head>
 
   <body>
@@ -12,7 +12,7 @@
     <form autocomplete="on">
       <p>To create New account.</p>
       <label for="Empid">Employee-Id</label>
-      <input type="text" placeholder="num" name="empid" id="empid" />
+      <input type="text" placeholder="num" name="empid" id="empId" />
       <label for="fName">First Name</label>
       <input type="text" placeholder="name" name="fName" id="fName" />
       <label for="lName">Last Name</label>
@@ -21,7 +21,7 @@
       <input type="text" name="address" id="address" />
       <label for="email">Email-Id</label>
       <input type="text" name="emailId" id="emailId" />
-      <button type="submit" onclick="getUserInfo(event)" class="submitbtn">
+      <button type="submit"  class="submitbtn">
         Submit
       </button>
       <button type="button" class="updatebtn">Update</button>
@@ -41,6 +41,6 @@
       <tbody></tbody>
     </table>
 
-    <script src="formWithLocalStorage.js"></script>
+    <script src="formUsingLocalStorage.js"></script>
   </body>
 </html>

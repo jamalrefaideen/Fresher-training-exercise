@@ -1,11 +1,15 @@
 //CURD OPERATION WITH USING LOCAL STORAGE
 
+
+// NOTE :
+// WITHOUT USING EMPTY ARRAY TO COLLECT DATA AND CONSTRUCTOR CLASS
+
 // Interacting With HTML Using DOM
 var form = document.querySelector("form");
-var employeeId = document.querySelector("#empid");
+var employeeId = document.querySelector("#empId");
 var firstName = document.querySelector("#fName");
 var lastName = document.querySelector("#lName");
-var city = document.querySelector("#address");
+var address = document.querySelector("#address");
 var emailId = document.querySelector("#emailId");
 var submitBtn = document.querySelector(".submitbtn");
 var updateBtn = document.querySelector(".updatebtn");
@@ -21,6 +25,9 @@ function init() {
 init();
 
 // Getting User Form Inputs Data
+
+submitBtn.addEventListener("click", getUserInfo);
+
 function getUserInfo(event) {
   event.preventDefault();
   var userInfo = {
@@ -116,7 +123,7 @@ function deleteField(data) {
     }
   });
   addStorage(employeeDetails);
-  alert("Form deleted succesfully");
+  alert("Warning - All Data Will Erase !?  ");
 }
 
 updateBtn.addEventListener("click", updateEmployeeDetails);

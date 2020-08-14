@@ -1,10 +1,14 @@
-// CRUD OPERATIONS USING CONSTRUCTOR OJECTS 
+// CRUD OPERATIONS USING CONSTRUCTOR AND LOCAL STORAGE
+
+// NOTE : PARTIALY IMPLEMENTED THE CLASS CONSTRUCTOR METHOD
 
 // Interacting With HTML Using DOM
 var form = document.querySelector("form");
-var employeeId = document.querySelector("#employeeId");
-var fullName = document.querySelector("#fullName");
+var employeeId = document.querySelector("#empId");
+var firstName = document.querySelector("#fName");
+var lastName = document.querySelector("#lName");
 var address = document.querySelector("#address");
+var emailId = document.querySelector("#emailId");
 var submitBtn = document.querySelector(".submitbtn");
 var updateBtn = document.querySelector(".updatebtn");
 var tbody = document.querySelector("tbody");
@@ -30,10 +34,12 @@ Store.getDataFormLocalStorage = function () {
 
 
 // CREATING FUNCTION CONSTRUCTOR (BLUEPRINT)
-function User(employeeName, fullName, address) {
-  this.employeeId = employeeName;
-  this.fullName = fullName;
+function User(employeeId, firstName,lastName, address, emailId) {
+  this.employeeId = employeeId;
+  this.firstName = firstName;
+  this.lastName = lastName;
   this.address = address;
+  this.emailId = emailId;
 }
 
 function Ui() {}
@@ -44,8 +50,10 @@ Ui.insertUserInfo = function (users) {
     var tr = document.createElement("tr");
     tr.innerHTML = `
     <td>${value.employeeId}</td>
-    <td>${value.fullName}</td>
+    <td>${value.firstName}</td>
+    <td>${value.lastName}</td>
     <td>${value.address}</td>
+    <td>${value.emailId}</td>
     <td><button type ="button" id="edit-btn">Edit</button></td>
     <td><button type ="button" id="delete-btn">Delete</button></td>`;
     tbody.appendChild(tr);
@@ -54,9 +62,11 @@ Ui.insertUserInfo = function (users) {
 };
 
 Ui.clearUserField = function () {
-  employeeId.value = "";
-  fullName.value = "";
+  employeeId .value = "";
+  firstName.value = "";
+  lastName.value="";
   address.value = "";
+  emailId.value = "";
 };
 
 Ui.deleteUserField = function (data) {
@@ -73,10 +83,12 @@ Ui.deleteUserField = function (data) {
 Ui.editUserfield = function (data) {
   var employeeDetails = Store.getDataFormLocalStorage();
   employeeDetails.forEach(function (user, index) {
-    if (user.employeeId == data) {
-      employeeId.value = user.employeeId;
-      fullName.value = user.fullName;
+    if (user.employeeId  == data) {
+      employeeId .value = user.employeeId ;
+      firstName.value = user.firstName;
+      lastName.value = user.lastName;
       address.value = user.address;
+      emailId.value = user.emailId;
       updateBtn.style.display = "block";
       submitBtn.style.display = "none";
       position = index;
@@ -86,9 +98,12 @@ Ui.editUserfield = function (data) {
 
 Ui.upadteEmployeeDetails = function () {
   var obj = {
-    employeeId: employeeId.value,
-    fullName: fullName.value,
+    employeeId : employeeId .value,
+    firstName: firstName.value,
+    lastName:lastName.value,
     address: address.value,
+    emailId:emailId.value,
+
   };
   var employeeDetails = Store.getDataFormLocalStorage();
   employeeDetails.splice(position, 1, obj);
@@ -104,15 +119,23 @@ submitBtn.addEventListener("click", getUserInfo);
 
 function getUserInfo(event) {
   event.preventDefault();
-  var empId = employeeId.value;
-  var name = fullName.value;
-  var city = address.value;
-  var userDetails = new User(empId, name, city);
-  var userList = Store.getDataFormLocalStorage();
-  userList.push(userDetails);
-  Store.addDataToLocalStorage(userList)
-  Ui.insertUserInfo(userList);
-  alert ("Registered Succesfully")
+  var employeeId  = employeeId.value;
+  var firstName = firstName.value;
+  var lastName = lastName.value;
+  var address = address.value;
+  var emailId = emailId.value
+
+
+  if (employeeId  === "" && firstName ==="" && lastName === "" && address ==="" && emailId === "") {
+    alert("Please Kidly fill all fields")
+  } else {
+    var userDetails = new User(employeeId , firstName,lastName, address, emailId);
+    var userList = Store.getDataFormLocalStorage();
+    userList.push(userDetails);
+    Store.addDataToLocalStorage(userList);
+    Ui.insertUserInfo(userList);
+    alert ("Registered Succesfully")
+  }
 }
 
 tbody.addEventListener("click", showUserInput);
@@ -127,6 +150,7 @@ function showUserInput(event) {
     var employeeId = event.target.parentElement.parentElement.cells.item(0)
       .textContent;
     Ui.editUserfield(employeeId);
+    event.target.parentElement.parentElement.remove();
   }
 }
 
@@ -144,7 +168,6 @@ function Store() {}
 
 function init() {
   var userList = Store.getDataFormLocalStorage();
-  // var empList = userList;
   Ui.insertUserInfo(userList);
 }
 init();
